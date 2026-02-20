@@ -1,49 +1,34 @@
-**Distributed Transaction Processing System**
+# Distributed Transaction Processing System   
 A high-performance, sharded distributed database system designed for ACID-compliant transactions across multiple clusters. This system utilizes Multi-Paxos for high availability within shards and Two-Phase Commit (2PC) to ensure atomicity for cross-shard operations. It also includes an advanced Hypergraph Partitioning module for dynamic data resharding based on transaction patterns.
 
-**Key Features**
-Sharded Architecture: Data is distributed across multiple clusters (shards), each maintained by a set of redundant nodes.
 
-Intra-shard Consensus (Multi-Paxos): Ensures data consistency and high availability within a cluster, allowing the system to remain functional even if a minority of nodes fail.
+## Key Features 
+**Sharded Architecture:** Data is distributed across multiple clusters (shards), each maintained by a set of redundant nodes.
 
-Cross-shard Atomicity (2PC): Implements the Two-Phase Commit protocol to handle transactions involving items stored in different clusters.
+**Intra-shard Consensus (Multi-Paxos):** Ensures data consistency and high availability within a cluster, allowing the system to remain functional even if a minority of nodes fail.
 
-Dynamic Resharding: Uses a Hypergraph Partitioner to analyze transaction history and re-route data to minimize cross-shard communication overhead.
+**Cross-shard Atomicity (2PC):** Implements the Two-Phase Commit protocol to handle transactions involving items stored in different clusters.
 
-Fault Tolerance: Includes mechanisms for leader election and node recovery with state synchronization from the cluster leader.
+**Dynamic Resharding:** Uses a Hypergraph Partitioner to analyze transaction history and re-route data to minimize cross-shard communication overhead.
 
-Persistence: A SQLite-based persistent storage layer ensures data durability across node restarts.
+**Fault Tolerance:** Includes mechanisms for leader election and node recovery with state synchronization from the cluster leader.
 
-Project Structure
-node.py: Core logic for the distributed node, including Paxos and 2PC state machines.
+**Persistence:** A SQLite-based persistent storage layer ensures data durability across node restarts.
 
-client.py: Client-side library for submitting transactions and managing retries.
-
-reshard.py: Hypergraph partitioning logic for optimizing data distribution.
-
-persistent.py: SQLite wrapper for node-local data persistence.
-
-config.py: Global system configurations, cluster mappings, and network addresses.
-
-distributed.proto: gRPC service definitions for inter-node and client-node communication.
+## Project Structure
+**node.py:** Core logic for the distributed node, including Paxos and 2PC state machines.
+**client.py:** Client-side library for submitting transactions and managing retries.
+**reshard.py:** Hypergraph partitioning logic for optimizing data distribution.
+**persistent.py:** SQLite wrapper for node-local data persistence.
+**config.py:** Global system configurations, cluster mappings, and network addresses.
+**distributed.proto:** gRPC service definitions for inter-node and client-node communication.
 
 
-Getting Started
-Prerequisites
-Python 3.8+
-
-gRPC and Protobuf
-
-Bash
-pip install grpcio grpcio-tools
-Running the System
-Initialize Clusters:
-The system starts by initializing the nodes defined in config.py. By default, it sets up 3 clusters with 3 nodes each.
-
-Bash
-python main.py <test_file.csv>
+## Getting Started
+**Installation:** pip install grpcio grpcio-tools
+**Initialize Clusters:** python main.py <test_file.csv>
 Benchmark Mode:
-You can run a performance benchmark with various workloads (Smallbank, YCSB, or TPC-C style):
+Run a performance benchmark with various workloads (Smallbank, YCSB, or TPC-C style):
 
 Bash
 python main.py --benchmark -n 1000 --read-ratio 0.5 --cross-shard-ratio 0.3

@@ -16,11 +16,11 @@ A high-performance, sharded distributed database system designed for ACID-compli
 **Persistence:** A SQLite-based persistent storage layer ensures data durability across node restarts.
 
 ## Project Structure
-**node.py:** Core logic for the distributed node, including Paxos and 2PC state machines.
-**client.py:** Client-side library for submitting transactions and managing retries.
-**reshard.py:** Hypergraph partitioning logic for optimizing data distribution.
-**persistent.py:** SQLite wrapper for node-local data persistence.
-**config.py:** Global system configurations, cluster mappings, and network addresses.
+**node.py:** Core logic for the distributed node, including Paxos and 2PC state machines. 
+**client.py:** Client-side library for submitting transactions and managing retries. 
+**reshard.py:** Hypergraph partitioning logic for optimizing data distribution. 
+**persistent.py:** SQLite wrapper for node-local data persistence. 
+**config.py:** Global system configurations, cluster mappings, and network addresses. 
 **distributed.proto:** gRPC service definitions for inter-node and client-node communication.
 
 

@@ -45,7 +45,7 @@ Run a performance benchmark with various workloads (Smallbank, YCSB, or TPC-C st
 `python main.py --benchmark -n 1000 --read-ratio 0.5 --cross-shard-ratio 0.3`
 
 **Performance Metrics:**
-The system tracks several key performance indicators:
+- The system tracks several key performance indicators:
 
    - **Throughput:** Transactions processed per second.
 

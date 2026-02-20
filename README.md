@@ -31,9 +31,9 @@ A high-performance, sharded distributed database system designed for ACID-compli
 
 ## Getting Started
 **Installation:** 
-     pip install grpcio grpcio-tools
+      pip install grpcio grpcio-tools
 **Initialize Clusters:** 
-     python main.py <test_file.csv>
+      python main.py <test_file.csv>
 Benchmark Mode:
 Run a performance benchmark with various workloads (Smallbank, YCSB, or TPC-C style):
 

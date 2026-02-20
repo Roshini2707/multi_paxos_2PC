@@ -47,39 +47,39 @@ Run a performance benchmark with various workloads (Smallbank, YCSB, or TPC-C st
 **Performance Metrics:**
 The system tracks several key performance indicators:
 
-**Throughput:** Transactions processed per second.
+   - **Throughput:** Transactions processed per second.
 
-**Latency:** Average Latency
+   - **Latency:** Average Latency
 
-**Success Rate:** Percentage of successfully committed transactions.
+   - **Success Rate:** Percentage of successfully committed transactions.
 
-**Cross-shard vs Intra-shard:** Latency breakdown by transaction type.
+   - **Cross-shard vs Intra-shard:** Latency breakdown by transaction type.
 
 ## Protocols Implemented
 **Multi-Paxos**
-Each cluster maintains a leader. When a request is received:
+  - Each cluster maintains a leader. When a request is received:
 
-Leader assigns a sequence number.
+    - Leader assigns a sequence number.
 
-**Accept Phase:** Leader broadcasts the proposal to replicas.
+    - **Accept Phase:** Leader broadcasts the proposal to replicas.
 
-**Commit Phase:** Once a majority responds, the transaction is applied locally and committed to the log.
+    - **Commit Phase:** Once a majority responds, the transaction is applied locally and committed to the log.
 
 **Two-Phase Commit (2PC)**
-For transactions involving multiple clusters:
+  - For transactions involving multiple clusters:
 
-**Prepare Phase:** The coordinator node asks all involved clusters to lock the items and validate balances.
+    - **Prepare Phase:** The coordinator node asks all involved clusters to lock the items and validate balances.
 
-**Commit/Abort Phase:** If all clusters report "Prepared," the coordinator issues a global commit; otherwise, it issues a global abort.
+    - **Commit/Abort Phase:** If all clusters report "Prepared," the coordinator issues a global commit; otherwise, it issues a global abort.
 
 **Dynamic Resharding**
-The ReshardCoordinator logs transaction affinity. When triggered, it:
+  - The ReshardCoordinator logs transaction affinity. When triggered, it:
 
-Builds a hypergraph where items are vertices and transactions are hyperedges.
+    - Builds a hypergraph where items are vertices and transactions are hyperedges.
 
-Computes an optimized partition using a greedy approach followed by Kernighan-Lin refinement.
+    - Computes an optimized partition using a greedy approach followed by Kernighan-Lin refinement.
 
-Generates a data movement plan to migrate items to their new optimal clusters.
+    - Generates a data movement plan to migrate items to their new optimal clusters.
 
 **Testing**
 The system supports interactive testing via CSV files. A test file should specify the test set number, the transaction (Transfer or Balance), and the list of currently "live" nodes to simulate failures.
